@@ -2,18 +2,24 @@ package org.erpmicroservices.products.api.rest.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.UUID;
 
 @Entity()
-public class ContainerType {
+public class CostComponentType {
 
  @Id
- @GeneratedValue(strategy = GenerationType.AUTO)
+ @GeneratedValue(generator = "uuid")
  private UUID id;
+ private String description;
 
- private String description = "";
+ public UUID getId() {
+	return id;
+ }
+
+ public void setId(UUID id) {
+	this.id = id;
+ }
 
  public String getDescription() {
 	return description;
@@ -23,11 +29,4 @@ public class ContainerType {
 	this.description = description;
  }
 
- public UUID getId() {
-	return id;
- }
-
- public void setId(UUID id) {
-	this.id = id;
- }
 }
