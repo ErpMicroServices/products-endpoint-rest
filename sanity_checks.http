@@ -17,4 +17,20 @@ Content-Type: application/json
   "description": "Hello world"
 }
 
+> {%
+client.global.set("location", response.headers.valueOf("Location"));
+%}
+
+###
+
+PUT {{location}}
+Content-Type: application/json
+
+{
+  "description": "Goodbye cruel world"
+}
+
+###
+DELETE {{location}}
+
 ###
