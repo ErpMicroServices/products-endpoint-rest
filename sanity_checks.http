@@ -34,3 +34,35 @@ Content-Type: application/json
 DELETE {{location}}
 
 ###
+
+POST http://localhost:8080/containerTypes
+Content-Type: application/json
+
+{
+  "description": "This is a container type"
+}
+
+> {%
+client.global.set("container_type_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/containers
+Content-Type: application/json
+
+{
+  "description": "This is a container",
+  "type": "{{container_type_location}}"
+}
+
+> {%
+client.global.set("container_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+GET {{container_location}}
+Content-Type: application/json
+
+###
