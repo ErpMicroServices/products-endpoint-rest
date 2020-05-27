@@ -11,8 +11,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class ContainerType {
-
+public class GoodIdentificationType {
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
  private UUID id;
