@@ -1,0 +1,42 @@
+POST http://localhost:8080/estimatedProductCostTypes
+Content-Type: application/json
+
+{
+  "description": "This is an estimated product cost type"
+}
+
+> {%
+client.global.set("estimatedProductCostTypesLocation", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "product 1"
+}
+
+> {%
+client.global.set("productsLocation", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/estimatedProductCosts
+Content-Type: application/json
+
+{
+  "fromDate": "2001-01-01",
+  "thruDate": "2002-02-02",
+  "cost": "1000.00",
+  "type": "{{estimatedProductCostTypesLocation}}",
+  "product": "{{productsLocation}}"
+}
+
+> {%
+client.global.set("estimatedProductCostsLocation", response.headers.valueOf("Location"));
+%}
+
+###
