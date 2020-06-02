@@ -3,6 +3,8 @@ package org.erpmicroservices.products.api.rest.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -19,6 +21,17 @@ public class Container {
  @ManyToOne
  @JoinColumn(name = "container_type_id", nullable = false)
  private ContainerType type;
+
+ @OneToMany(mappedBy = "container")
+ private List<InventoryItem> contains = new ArrayList<>();
+
+ public List<InventoryItem> getContains() {
+	return contains;
+ }
+
+ public void setContains(List<InventoryItem> contains) {
+	this.contains = contains;
+ }
 
  public UUID getId() {
 	return id;
