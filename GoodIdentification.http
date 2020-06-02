@@ -1,0 +1,36 @@
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "product 1"
+}
+
+> {%
+client.global.set("productsLocation", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/goodIdentificationTypes
+Content-Type: application/json
+
+{
+  "description": "This is a good identification type"
+}
+
+> {%
+client.global.set("goodIdentificationTypes_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/goodIdentifications
+Content-Type: application/json
+
+{
+  "value": "good id value",
+  "good": "{{productsLocation}}",
+  "type": "{{goodIdentificationTypes_location}}"
+}
+
+###
