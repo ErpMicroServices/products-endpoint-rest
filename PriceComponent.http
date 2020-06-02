@@ -1,0 +1,145 @@
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "product 1"
+}
+
+> {%
+client.global.set("productsLocation", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/productCategories
+Content-Type: application/json
+
+{
+  "description": "This is a product category"
+}
+
+> {%
+client.global.set("productCategories_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/quantityBreaks
+Content-Type: application/json
+
+{
+  "fromQuantity": 1,
+  "thruQuantity": 2
+}
+
+> {%
+client.global.set("quantityBreaks_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/orderValues
+Content-Type: application/json
+
+{
+  "fromAmount": 1.1,
+  "thruAmount": 2.2
+}
+
+> {%
+client.global.set("orderValues_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/saleTypes
+Content-Type: application/json
+
+{
+  "description": "This is a sale type"
+}
+
+> {%
+client.global.set("saleTypes_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/unitOfMeasures
+Content-Type: application/json
+
+{
+  "description": "This is a Unit of Measure",
+  "abbreviation": "TiaUM"
+}
+
+> {%
+client.global.set("unitOfMeasures_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/productFeatureCategories
+Content-Type: application/json
+
+{
+  "description": "This is a product feature category"
+}
+
+> {%
+client.global.set("productFeatureCategories_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/productFeatures
+Content-Type: application/json
+
+{
+  "description": "This is a product feature",
+  "category": "{{productFeatureCategories_location}}",
+  "unitOfMeasure": "{{unitOfMeasures_location}}"
+}
+
+> {%
+client.global.set("productFeatures_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/priceComponents
+Content-Type: application/json
+
+{
+"fromDate": "2001-01-01",
+"thruDate": "2002-02-02",
+"price" : "1.00",
+"percent": "2.0",
+"comment" : "This is a price components",
+"geographicBoundaryId": "c52ca53d-0513-442d-ade2-994b370e0510",
+"partyType": "c52ca53d-0513-442d-ade2-994b370e0510",
+"productCategory" : "{{productCategories_location}}",
+"quantityBreak": "{{quantityBreaks_location}}",
+"orderValue": "{{orderValues_location}}",
+"saleType": "{{saleTypes_location}}",
+"unitOfMeasure": "{{unitOfMeasures_location}}",
+"partyId": "c52ca53d-0513-442d-ade2-994b370e0510",
+"productFeature": "{{productFeatures_location}}",
+"product": "{{products_location}}"
+}
+
+> {%
+client.global.set("priceComponents_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+GET {{priceComponents_location}}
+Content-Type: application/json
+
+###
+
+GET {{priceComponents_location}}/saleType
+Content-Type: application/json
+
+###
