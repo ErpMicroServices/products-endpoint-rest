@@ -1,0 +1,154 @@
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "product 1"
+}
+
+> {%
+client.global.set("productsLocation", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/goodIdentificationTypes
+Content-Type: application/json
+
+{
+  "description": "This is a good identification type"
+}
+
+> {%
+client.global.set("goodIdentificationTypes_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/goodIdentifications
+Content-Type: application/json
+
+{
+  "value": "good id value",
+  "good": "{{productsLocation}}",
+  "type": "{{goodIdentificationTypes_location}}"
+}
+
+> {%
+ client.global.set("goodIdentifications_location", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/inventoryItemStatusTypes
+Content-Type: application/json
+
+{
+  "description": "inventory item status type"
+}
+
+> {%
+ client.global.set("inventoryItemStatusTypes_location", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/lots
+Content-Type: application/json
+
+{
+  "creationDate": "2000-01-01",
+  "quantity": 1
+}
+
+> {%
+ client.global.set("lots_location", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/containerTypes
+Content-Type: application/json
+
+{
+  "description": "This is a container type"
+}
+
+> {%
+client.global.set("containerTypes_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/containers
+Content-Type: application/json
+
+{
+  "description": "This is a container",
+  "type": "{{containerTypes_location}}"
+}
+
+> {%
+client.global.set("containers_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/inventoryItemStatusTypes
+Content-Type: application/json
+
+{
+  "description": "This is a status type"
+}
+
+> {%
+client.global.set("inventoryItemStatusTypes_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/inventoryItems
+Content-Type: application/json
+
+{
+  "serialNum": "This is an inventory item",
+  "quantityOnHand": 1,
+  "goodId": "{{goodIdentifications_location}}",
+  "statusType": "{{inventoryItemStatusTypes_location}}",
+  "lot": "{{lots_location}}",
+  "container": "{{containers_location}}"
+}
+
+> {%
+client.global.set("inventoryItems_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/reasons
+Content-Type: application/json
+
+{
+  "description": "This is a reason"
+}
+
+> {%
+client.global.set("reasons_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/inventoryItemVariances
+Content-Type: application/json
+
+{
+  "comment": "This is an inventory item variance",
+  "quantity": 1,
+  "reason": "{{reasons_location}}",
+  "item": "{{inventoryItems_location}}"
+}
+
+> {%
+client.global.set("inventoryItemVariances_location", response.headers.valueOf("Location"));
+%}
+
+###

@@ -24,6 +24,7 @@ public class InventoryItem extends AbstractPersistable<UUID> {
  @JoinColumn(name = "lot_id")
  private Lot lot;
  @ManyToOne
+ @JoinColumn(name = "container_id")
  private Container container;
 
  private UUID facilityId;
