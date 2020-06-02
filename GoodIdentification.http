@@ -6,7 +6,7 @@ Content-Type: application/json
 }
 
 > {%
-client.global.set("productsLocation", response.headers.valueOf("Location"));
+client.global.set("products_location", response.headers.valueOf("Location"));
 %}
 
 ###
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 {
   "value": "good id value",
-  "good": "{{productsLocation}}",
+  "good": "{{products_location}}",
   "type": "{{goodIdentificationTypes_location}}"
 }
 

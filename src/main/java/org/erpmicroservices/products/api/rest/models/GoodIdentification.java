@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 @Entity
-@Table(name = "good_identification_id_value")
+@Table(name = "good_identification")
 public class GoodIdentification extends AbstractPersistable<UUID> {
  @NotEmpty
  private String value;
