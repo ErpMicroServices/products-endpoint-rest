@@ -1,0 +1,33 @@
+POST http://localhost:8080/productCategories
+Content-Type: application/json
+
+{
+  "description": "This is a product category"
+}
+
+> {%
+client.global.set("productCategories_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/marketInterests
+Content-Type: application/json
+
+{
+"fromDate": "2001-01-01",
+"thruDate": "2002-02-02",
+"productCategory": "{{productCategories_location}}",
+"partyClassificationTypeId": "86ca32a1-4b6c-4d4e-b07e-f198a169d3fe"
+}
+
+> {%
+client.global.set("marketInterest_location", response.headers.valueOf("Location"));
+%}
+
+###
+
+GET {{marketInterest_location}}
+Content-Type: application/json
+
+###
