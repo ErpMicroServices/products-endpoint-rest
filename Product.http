@@ -6,11 +6,101 @@ Content-Type: application/json
 }
 
 > {%
+
 client.test("Request executed successfully", function() {
         client.assert(response.status === 201, "Response status is not 201");
     });
 
 client.global.set("productType", response.headers.valueOf("Location"));
+%}
+
+###
+
+
+POST http://localhost:8080/quantityBreaks
+Content-Type: application/json
+
+{
+  "fromQuantity": 1,
+  "thruQuantity": 2
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("quantityBreak", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/orderValues
+Content-Type: application/json
+
+{
+  "fromAmount": 1.1,
+  "thruAmount": 2.2
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("orderValue", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/saleTypes
+Content-Type: application/json
+
+{
+  "description": "This is a sale type"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("saleType", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/unitOfMeasures
+Content-Type: application/json
+
+{
+  "description": "This is a Unit of Measure",
+  "abbreviation": "TiaUM"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("unitOfMeasure", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/productCategories
+Content-Type: application/json
+
+{
+  "description": "This is a product category"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("productCategory", response.headers.valueOf("Location"));
 %}
 
 ###
@@ -215,6 +305,36 @@ client.test("Request executed successfully", function() {
         client.assert(response.status === 201, "Response status is not 201");
     });
 client.global.set("supplier", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/priceComponents
+Content-Type: application/json
+
+{
+  "fromDate": "2001-01-01",
+  "thruDate": "2002-02-02",
+  "price": "1.00",
+  "percent": ".99",
+  "comment": "This is a price component",
+  "geographicBoundaryId": "{{$uuid}}",
+  "partyType": "{{$uuid}}",
+  "category": "{{productCategory}}",
+  "quantityBreak": "{{quantityBreak}}",
+  "orderValue": "{{orderValue}}",
+  "saleType": "{{saleType}}",
+  "unitOfMeasure": "{{unitOfMeasure}}",
+  "partyID": "{{$uuid}}",
+  "feature": "{{feature1}}",
+  "product": "{{product}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+client.global.set("priceComponent", response.headers.valueOf("Location"))
  %}
 
 ###

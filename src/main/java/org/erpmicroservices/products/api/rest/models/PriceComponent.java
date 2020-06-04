@@ -1,45 +1,63 @@
 package org.erpmicroservices.products.api.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity(name = "price_component")
 public class PriceComponent extends AbstractPersistable<UUID> {
+ @Column(name = "from_date", columnDefinition = "DATE")
+ @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+ @JsonFormat(pattern = "yyyy-MM-dd")
  private LocalDate fromDate;
+
+ @Column(name = "thru_date", columnDefinition = "DATE")
+ @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+ @JsonFormat(pattern = "yyyy-MM-dd")
  private LocalDate thruDate;
+
  private BigDecimal price;
+
  private BigDecimal percent;
+
  private String comment;
- private UUID geographic_boundary_id;
- private UUID party_type;
+
+ private UUID geographicBoundaryId;
+
+ private UUID partyType;
+
  @ManyToOne
  @JoinColumn(name = "product_category_id")
  private ProductCategory category;
+
  @OneToOne
  @JoinColumn(name = "quantity_break_id")
  private QuantityBreak quantityBreak;
+
  @OneToOne
  @JoinColumn(name = "order_value_id")
  private OrderValue orderValue;
+
  @OneToOne
  @JoinColumn(name = "sale_type_id")
  private SaleType saleType;
+
  @ManyToOne
  @JoinColumn(name = "unit_of_measure_id")
  private UnitOfMeasure unitOfMeasure;
+
  private UUID partyId;
+
  @ManyToOne
  @JoinColumn(name = "feature_id")
  private Feature feature;
+
  @ManyToOne
- @JoinColumn(name = "product_id")
  private Product product;
 
  public LocalDate getFromDate() {
@@ -82,20 +100,20 @@ public class PriceComponent extends AbstractPersistable<UUID> {
 	this.comment = comment;
  }
 
- public UUID getGeographic_boundary_id() {
-	return geographic_boundary_id;
+ public UUID getGeographicBoundaryId() {
+	return geographicBoundaryId;
  }
 
- public void setGeographic_boundary_id(UUID geographic_boundary_id) {
-	this.geographic_boundary_id = geographic_boundary_id;
+ public void setGeographicBoundaryId(UUID geographicBoundaryId) {
+	this.geographicBoundaryId = geographicBoundaryId;
  }
 
- public UUID getParty_type() {
-	return party_type;
+ public UUID getPartyType() {
+	return partyType;
  }
 
- public void setParty_type(UUID party_type) {
-	this.party_type = party_type;
+ public void setPartyType(UUID party_type) {
+	this.partyType = party_type;
  }
 
  public ProductCategory getCategory() {
