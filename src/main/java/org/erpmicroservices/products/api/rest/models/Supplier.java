@@ -1,11 +1,15 @@
 package org.erpmicroservices.products.api.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vladmihalcea.hibernate.type.interval.PostgreSQLIntervalType;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -16,18 +20,35 @@ import java.util.UUID;
 	typeClass = PostgreSQLIntervalType.class,
 	defaultForType = Duration.class
 )
-public class Suppplier extends AbstractPersistable<UUID> {
+public class Supplier extends AbstractPersistable<UUID> {
+
+ @Column(name = "available_from_date", columnDefinition = "DATE")
+ @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+ @JsonFormat(pattern = "yyyy-MM-dd")
  private LocalDate availableFromDate;
+
+ @Column(name = "available_thru_date", columnDefinition = "DATE")
+ @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+ @JsonFormat(pattern = "yyyy-MM-dd")
  private LocalDate availableThruDate;
+
  @Column(name = "standard_lead_time", columnDefinition = "interval")
+ @JsonProperty(value = "duration")
  private Duration standardLeadTime;
+
  private String comment;
+
  @ManyToOne
  private Product product;
+
  private UUID organizationId;
+
  @ManyToOne
+ @JoinColumn(name = "preference_type_id")
  private PreferenceType preferenceType;
+
  @ManyToOne
+ @JoinColumn(name = "rating_type_id")
  private RatingType ratingType;
 
  public LocalDate getAvailableFromDate() {

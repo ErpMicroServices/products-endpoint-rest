@@ -5,11 +5,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity(name = "feature_interaction")
-@Table(name = "feature_interaction")
 public class FeatureInteraction extends AbstractPersistable<UUID> {
  @ManyToOne
  @JoinColumn(name = "feature1_id")

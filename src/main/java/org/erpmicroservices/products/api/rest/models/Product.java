@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,14 +44,17 @@ public class Product extends AbstractPersistable<UUID> {
  @JoinColumn(name = "product_id")
  private List<FeatureInteraction> featureInteractions;
 
-// @OneToMany(
-//	 cascade = CascadeType.ALL,
-//	 orphanRemoval = true)
-// private List<FeatureApplicability> features;
-// @OneToMany(
-//	 cascade = CascadeType.ALL,
-//	 orphanRemoval = true)
-// private List<Suppplier> suppliers = new ArrayList<>();
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "product_id")
+ private List<FeatureApplicability> featureApplicabilities;
+
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "product_id")
+ private List<Supplier> suppliers = new ArrayList<>();
 
 
  public List<FeatureInteraction> getFeatureInteractions() {
