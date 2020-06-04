@@ -16,6 +16,24 @@ client.global.set("productType", response.headers.valueOf("Location"));
 
 ###
 
+POST http://localhost:8080/productAssociationTypes
+Content-Type: application/json
+
+{
+  "description": "This is a product association type"
+}
+
+> {%
+
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("productAssociationType", response.headers.valueOf("Location"));
+%}
+
+###
+
 POST http://localhost:8080/estimatedProductCostTypes
 Content-Type: application/json
 
@@ -262,6 +280,27 @@ client.global.set("product", response.headers.valueOf("Location"));
 
 ###
 
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "This is another product",
+  "introductionDate": "2003-03-03",
+  "salesDiscontinuationDate": "2004-04-04",
+  "comment": "This is another comment on a product",
+  "manufacturedBy": "48303eaa-dfb3-4def-8ab0-6543eabf6286",
+  "type": "{{productType}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+client.global.set("product2", response.headers.valueOf("Location"));
+%}
+
+###
+
 POST http://localhost:8080/featureInteractions
 Content-Type: application/json
 
@@ -376,6 +415,30 @@ client.test("Request executed successfully", function() {
         client.assert(response.status === 201, "Response status is not 201");
     });
 client.global.set("estimatedProductCost", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/productAssociations
+Content-Type: application/json
+
+{
+  "fromDate": "2001-01-01",
+  "thruDate": "2002-02-02",
+  "reason": "This is a product association reason",
+  "quantityUsed": 1,
+  "instruction": "This is a product association instruction",
+  "quantity": 2,
+  "type": "{{productAssociationType}}",
+  "fromProduct": "{{product}}",
+  "toProduct": "{{product2}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+client.global.set("productAssociation", response.headers.valueOf("Location"))
  %}
 
 ###

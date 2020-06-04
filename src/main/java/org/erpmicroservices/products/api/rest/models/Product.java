@@ -68,6 +68,35 @@ public class Product extends AbstractPersistable<UUID> {
  @JoinColumn(name = "product_id")
  private List<EstimatedProductCost> estimatedProductCosts = new ArrayList<>();
 
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "from_product_id")
+ private List<ProductAssociation> fromProductAssociations = new ArrayList<>();
+
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "to_product_id")
+ private List<ProductAssociation> toProductAssociations = new ArrayList<>();
+
+
+ public List<ProductAssociation> getFromProductAssociations() {
+	return fromProductAssociations;
+ }
+
+ public void setFromProductAssociations(List<ProductAssociation> fromProductAssociations) {
+	this.fromProductAssociations = fromProductAssociations;
+ }
+
+ public List<ProductAssociation> getToProductAssociations() {
+	return toProductAssociations;
+ }
+
+ public void setToProductAssociations(List<ProductAssociation> toProductAssociations) {
+	this.toProductAssociations = toProductAssociations;
+ }
+
  public List<EstimatedProductCost> getEstimatedProductCosts() {
 	return estimatedProductCosts;
  }
