@@ -20,22 +20,29 @@ public class EstimatedProductCost extends AbstractPersistable<UUID> {
  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
  @JsonFormat(pattern = "yyyy-MM-dd")
  private LocalDate fromDate;
+
  @Column(name = "thru_date", columnDefinition = "DATE")
  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
  @JsonFormat(pattern = "yyyy-MM-dd")
  private LocalDate thruDate;
+
  private BigDecimal cost;
+
  @NotNull
  @ManyToOne
  @JoinColumn(name = "estimated_product_cost_type_id", nullable = false)
  private EstimatedProductCostType type;
+
  @NotNull
  @ManyToOne
  @JoinColumn(name = "product_id", nullable = false)
  private Product product;
+
  @ManyToOne
  private Feature feature;
+
  private UUID geographicBoundaryId;
+
  private UUID organizationId;
 
  public LocalDate getFromDate() {

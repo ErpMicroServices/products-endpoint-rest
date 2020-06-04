@@ -16,6 +16,24 @@ client.global.set("productType", response.headers.valueOf("Location"));
 
 ###
 
+POST http://localhost:8080/estimatedProductCostTypes
+Content-Type: application/json
+
+{
+  "description": "This is an estimated product type"
+}
+
+> {%
+
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("estimatedProductCostType", response.headers.valueOf("Location"));
+%}
+
+###
+
 
 POST http://localhost:8080/quantityBreaks
 Content-Type: application/json
@@ -335,6 +353,29 @@ client.test("Request executed successfully", function() {
         client.assert(response.status === 201, "Response status is not 201");
     });
 client.global.set("priceComponent", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/estimatedProductCosts
+Content-Type: application/json
+
+{
+  "fromDate": "2001-01-01",
+  "thruDate": "2002-02-02",
+  "cost": "1.00",
+  "type": "{{estimatedProductCostType}}",
+  "product": "{{product}}",
+  "feature": "{{feature1}}",
+  "geographicBoundaryId": "{{$uuid}}",
+  "organizationId": "{{$uuid}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+client.global.set("estimatedProductCost", response.headers.valueOf("Location"))
  %}
 
 ###
