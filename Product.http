@@ -1,0 +1,124 @@
+POST http://localhost:8080/productTypes
+Content-Type: application/json
+
+{
+  "description": "This is a product type"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("productType", response.headers.valueOf("Location"));
+%}
+
+###
+POST http://localhost:8080/featureCategories
+Content-Type: application/json
+
+{
+  "description": "This is a feature category"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("featureCategory", response.headers.valueOf("Location"))
+ %}
+
+###
+POST http://localhost:8080/featureInteractionTypes
+Content-Type: application/json
+
+{
+  "description": "This is a feature interaction type"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("featureInteractionType", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/features
+Content-Type: application/json
+
+{
+  "description": "This is feature 1",
+  "category": "{{featureCategory}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("feature1", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/features
+Content-Type: application/json
+
+{
+  "description": "This is feature 2",
+  "category": "{{featureCategory}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("feature2", response.headers.valueOf("Location"))
+ %}
+
+###
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+  "name": "This is a product",
+  "introductionDate": "2001-01-01",
+  "salesDiscontinuationDate": "2002-02-02",
+  "comment": "This is a comment on a product",
+  "manufacturedBy": "48303eaa-dfb3-4def-8ab0-6543eabf6286",
+  "type": "{{productType}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+client.global.set("product", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/featureInteractions
+Content-Type: application/json
+
+{
+"betweenThis": "{{feature1}}",
+  "feature2": "{{feature2}}",
+  "type": "{{featureInteractionType}}",
+  "product": "{{product}}"
+
+}
+
+> {%
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+client.global.set("featureInteraction", response.headers.valueOf("Location"))
+ %}
+
+###

@@ -79,7 +79,7 @@ client.global.set("unitOfMeasures_location", response.headers.valueOf("Location"
 
 ###
 
-POST http://localhost:8080/productFeatureCategories
+POST http://localhost:8080/featureCategories
 Content-Type: application/json
 
 {
@@ -87,22 +87,22 @@ Content-Type: application/json
 }
 
 > {%
-client.global.set("productFeatureCategories_location", response.headers.valueOf("Location"));
+client.global.set("featureCategories_location", response.headers.valueOf("Location"));
 %}
 
 ###
 
-POST http://localhost:8080/productFeatures
+POST http://localhost:8080/features
 Content-Type: application/json
 
 {
   "description": "This is a product feature",
-  "category": "{{productFeatureCategories_location}}",
+  "category": "{{featureCategories_location}}",
   "unitOfMeasure": "{{unitOfMeasures_location}}"
 }
 
 > {%
-client.global.set("productFeatures_location", response.headers.valueOf("Location"));
+client.global.set("features_location", response.headers.valueOf("Location"));
 %}
 
 ###
@@ -124,7 +124,7 @@ Content-Type: application/json
 "saleType": "{{saleTypes_location}}",
 "unitOfMeasure": "{{unitOfMeasures_location}}",
 "partyId": "c52ca53d-0513-442d-ade2-994b370e0510",
-"productFeature": "{{productFeatures_location}}",
+"feature": "{{features_location}}",
 "product": "{{products_location}}"
 }
 

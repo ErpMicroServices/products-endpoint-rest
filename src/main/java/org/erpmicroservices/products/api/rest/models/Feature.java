@@ -8,21 +8,21 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
-@Entity(name = "product_feature")
-public class ProductFeature extends AbstractPersistable<UUID> {
+@Entity(name = "feature")
+public class Feature extends AbstractPersistable<UUID> {
  @NotEmpty
  private String description;
  @ManyToOne
- @JoinColumn(name = "product_feature_category_id")
- private ProductFeatureCategory category;
+ @JoinColumn(name = "feature_category_id")
+ private FeatureCategory category;
  @ManyToOne
  private UnitOfMeasure unitOfMeasure;
 
- public ProductFeatureCategory getCategory() {
+ public FeatureCategory getCategory() {
 	return category;
  }
 
- public void setCategory(ProductFeatureCategory category) {
+ public void setCategory(FeatureCategory category) {
 	this.category = category;
  }
 

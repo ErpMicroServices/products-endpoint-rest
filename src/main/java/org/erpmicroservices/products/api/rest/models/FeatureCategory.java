@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import java.util.UUID;
 
 @Entity
-public class ProductFeatureCategory extends AbstractPersistable<UUID> {
+public class FeatureCategory extends AbstractPersistable<UUID> {
  private String description;
 
  public String getDescription() {

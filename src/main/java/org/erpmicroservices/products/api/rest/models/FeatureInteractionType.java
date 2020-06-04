@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class ProductFeatureInteractionType {
+public class FeatureInteractionType {
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
  private UUID id;

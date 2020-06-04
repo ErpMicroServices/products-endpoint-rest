@@ -34,7 +34,7 @@ public class EstimatedProductCost extends AbstractPersistable<UUID> {
  @JoinColumn(name = "product_id", nullable = false)
  private Product product;
  @ManyToOne
- private ProductFeature productFeature;
+ private Feature feature;
  private UUID geographicBoundaryId;
  private UUID organizationId;
 
@@ -78,12 +78,12 @@ public class EstimatedProductCost extends AbstractPersistable<UUID> {
 	this.product = product;
  }
 
- public ProductFeature getProductFeature() {
-	return productFeature;
+ public Feature getFeature() {
+	return feature;
  }
 
- public void setProductFeature(ProductFeature productFeature) {
-	this.productFeature = productFeature;
+ public void setFeature(Feature feature) {
+	this.feature = feature;
  }
 
  public UUID getGeographicBoundaryId() {
@@ -110,7 +110,7 @@ public class EstimatedProductCost extends AbstractPersistable<UUID> {
 		.append("cost", cost)
 		.append("type", type)
 		.append("product", product)
-		.append("productFeature", productFeature)
+		.append("feature", feature)
 		.append("geographicBoundaryId", geographicBoundaryId)
 		.append("organizationId", organizationId)
 		.toString();

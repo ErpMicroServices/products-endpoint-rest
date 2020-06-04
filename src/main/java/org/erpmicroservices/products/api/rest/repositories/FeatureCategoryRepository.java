@@ -1,12 +1,12 @@
 package org.erpmicroservices.products.api.rest.repositories;
 
-import org.erpmicroservices.products.api.rest.models.ProductFeatureApplicabilityType;
+import org.erpmicroservices.products.api.rest.models.FeatureCategory;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.UUID;
 
 @RepositoryRestResource
-public interface ProductFeatureApplicabilityTypeRepository extends PagingAndSortingRepository<ProductFeatureApplicabilityType, UUID> {
+public interface FeatureCategoryRepository extends PagingAndSortingRepository<FeatureCategory, UUID> {
 
 }

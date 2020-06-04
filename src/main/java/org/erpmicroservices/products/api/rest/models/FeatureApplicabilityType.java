@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class ProductFeatureApplicabilityType {
+public class FeatureApplicabilityType {
  @Id
  @GeneratedValue(strategy = GenerationType.AUTO)
  private UUID id;

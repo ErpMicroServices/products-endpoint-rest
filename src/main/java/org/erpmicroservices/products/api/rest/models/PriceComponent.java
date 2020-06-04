@@ -36,8 +36,8 @@ public class PriceComponent extends AbstractPersistable<UUID> {
  private UnitOfMeasure unitOfMeasure;
  private UUID partyId;
  @ManyToOne
- @JoinColumn(name = "product_feature_id")
- private ProductFeature feature;
+ @JoinColumn(name = "feature_id")
+ private Feature feature;
  @ManyToOne
  @JoinColumn(name = "product_id")
  private Product product;
@@ -146,11 +146,11 @@ public class PriceComponent extends AbstractPersistable<UUID> {
 	this.partyId = partyId;
  }
 
- public ProductFeature getFeature() {
+ public Feature getFeature() {
 	return feature;
  }
 
- public void setFeature(ProductFeature feature) {
+ public void setFeature(Feature feature) {
 	this.feature = feature;
  }
 
