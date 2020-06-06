@@ -16,6 +16,73 @@ client.global.set("productType", response.headers.valueOf("Location"));
 
 ###
 
+POST http://localhost:8080/inventoryItemStatusTypes
+Content-Type: application/json
+
+{
+  "description": "inventory item status type"
+}
+
+> {%
+ client.global.set("inventoryItemStatusType", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/lots
+Content-Type: application/json
+
+{
+  "creationDate": "2000-01-01",
+  "quantity": 1
+}
+
+> {%
+ client.global.set("lot", response.headers.valueOf("Location"))
+ %}
+
+###
+
+POST http://localhost:8080/containerTypes
+Content-Type: application/json
+
+{
+  "description": "This is a container type"
+}
+
+> {%
+client.global.set("containerType", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/containers
+Content-Type: application/json
+
+{
+  "description": "This is a container",
+  "type": "{{containerType}}"
+}
+
+> {%
+client.global.set("container", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/inventoryItemStatusTypes
+Content-Type: application/json
+
+{
+  "description": "This is a status type"
+}
+
+> {%
+client.global.set("inventoryItemStatusType", response.headers.valueOf("Location"));
+%}
+
+###
+
 POST http://localhost:8080/goodIdentificationTypes
 Content-Type: application/json
 
@@ -286,7 +353,8 @@ Content-Type: application/json
   "salesDiscontinuationDate": "2002-02-02",
   "comment": "This is a comment on a product",
   "manufacturedBy": "48303eaa-dfb3-4def-8ab0-6543eabf6286",
-  "type": "{{productType}}"
+  "type": "{{productType}}",
+  "unitOfMeasure": "{{unitOfMeasure}}"
 }
 
 > {%
@@ -307,7 +375,8 @@ Content-Type: application/json
   "salesDiscontinuationDate": "2004-04-04",
   "comment": "This is another comment on a product",
   "manufacturedBy": "48303eaa-dfb3-4def-8ab0-6543eabf6286",
-  "type": "{{productType}}"
+  "type": "{{productType}}",
+  "unitOfMeasure": "{{unitOfMeasure}}"
 }
 
 > {%
@@ -324,7 +393,7 @@ Content-Type: application/json
 
 {
 
-  "betweenThis": "{{feature1}}",
+  "feature1": "{{feature1}}",
   "feature2": "{{feature2}}",
   "type": "{{featureInteractionType}}",
   "product": "{{product}}"
@@ -476,5 +545,57 @@ client.assert(response.status === 201, "Response status is not 201");
 });
 client.global.set("goodIdentification", response.headers.valueOf("Location"))
 %}
+
+###
+
+POST http://localhost:8080/inventoryItems
+Content-Type: application/json
+
+{
+  "good": "{{product}}",
+  "serialNum": "This is an inventory item",
+  "quantityOnHand": 1,
+  "statusType": "{{inventoryItemStatusType}}",
+  "lot": "{{lot}}",
+  "container": "{{container}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 201, "Response status is not 201");
+});
+client.global.set("inventoryItem d", response.headers.valueOf("Location"));
+%}
+
+###
+
+POST http://localhost:8080/reorderGuidelines
+Content-Type: application/json
+
+{
+  "fromDate": "2001-01-01",
+  "thruDate": "2002-02-02",
+  "reorderQuantity": 1,
+  "reorderLevel": 2,
+  "basedOnGeographicBoundary": "{{$uuid}}",
+  "basedOnFacility": "{{$uuid}}",
+  "basedOnInternalOrganization": "{{$uuid}}",
+  "good": "{{product}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 201, "Response status is not 201");
+});
+client.global.set("reorderGuideline", response.headers.valueOf("Location"));
+%}
+
+###
+
+GET {{product}}
+
+###
+
+GET {{product}}/reorderGuidelines
 
 ###

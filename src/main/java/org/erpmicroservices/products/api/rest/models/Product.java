@@ -86,6 +86,46 @@ public class Product extends AbstractPersistable<UUID> {
  @JoinColumn(name = "good_id")
  private List<GoodIdentification> goodIdentifications = new ArrayList<>();
 
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "good_id")
+ private List<InventoryItem> inventoryItems = new ArrayList<>();
+
+ @ManyToOne
+ @JoinColumn(name = "unit_of_measure_id")
+ private UnitOfMeasure unitOfMeasure;
+
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "good_id")
+ private List<ReorderGuideline> reorderGuidelines = new ArrayList<>();
+
+ public UnitOfMeasure getUnitOfMeasure() {
+	return unitOfMeasure;
+ }
+
+ public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+	this.unitOfMeasure = unitOfMeasure;
+ }
+
+ public List<GoodIdentification> getGoodIdentifications() {
+	return goodIdentifications;
+ }
+
+ public void setGoodIdentifications(List<GoodIdentification> goodIdentifications) {
+	this.goodIdentifications = goodIdentifications;
+ }
+
+ public List<InventoryItem> getInventoryItems() {
+	return inventoryItems;
+ }
+
+ public void setInventoryItems(List<InventoryItem> inventoryItems) {
+	this.inventoryItems = inventoryItems;
+ }
+
  public List<ProductAssociation> getFromProductAssociations() {
 	return fromProductAssociations;
  }

@@ -13,21 +13,34 @@ import java.util.UUID;
 @Table(name = "inventory_item")
 public class InventoryItem extends AbstractPersistable<UUID> {
  private String serialNum;
+
  private long quantityOnHand;
- @ManyToOne
- @JoinColumn(name = "good_id")
- private GoodIdentification goodId;
+
  @ManyToOne
  @JoinColumn(name = "inventory_item_status_type_id")
  private InventoryItemStatusType statusType;
+
  @ManyToOne
  @JoinColumn(name = "lot_id")
  private Lot lot;
+
  @ManyToOne
  @JoinColumn(name = "container_id")
  private Container container;
 
+ @ManyToOne
+ @JoinColumn(name = "good_id")
+ private Product good;
+
  private UUID facilityId;
+
+ public Product getGood() {
+	return good;
+ }
+
+ public void setGood(Product good) {
+	this.good = good;
+ }
 
  public String getSerialNum() {
 	return serialNum;
@@ -43,14 +56,6 @@ public class InventoryItem extends AbstractPersistable<UUID> {
 
  public void setQuantityOnHand(long quantityOnHand) {
 	this.quantityOnHand = quantityOnHand;
- }
-
- public GoodIdentification getGoodId() {
-	return goodId;
- }
-
- public void setGoodId(GoodIdentification goodId) {
-	this.goodId = goodId;
  }
 
  public InventoryItemStatusType getStatusType() {
@@ -90,7 +95,6 @@ public class InventoryItem extends AbstractPersistable<UUID> {
 	return new ToStringBuilder(this)
 		.append("serialNum", serialNum)
 		.append("quantityOnHand", quantityOnHand)
-		.append("goodId", goodId)
 		.append("statusType", statusType)
 		.append("lot", lot)
 		.append("container", container)
