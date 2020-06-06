@@ -592,10 +592,43 @@ client.global.set("reorderGuideline", response.headers.valueOf("Location"));
 
 ###
 
+POST http://localhost:8080/productCategoryClassifications
+Content-Type: application/json
+
+{
+  "fromDate": "2001-01-01",
+  "thruDate": "2002-02-02",
+  "primaryFlag": true,
+  "comment": "This is the product category classification comment",
+  "product": "{{product}}",
+  "category": "{{productCategory}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 201, "Response status is not 201");
+});
+client.global.set("productCategoryClassification", response.headers.valueOf("Location"));
+%}
+
+###
+
 GET {{product}}
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 200, "Response status is not 200");
+});
+%}
 
 ###
 
 GET {{product}}/reorderGuidelines
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 200, "Response status is not 200");
+});
+%}
 
 ###

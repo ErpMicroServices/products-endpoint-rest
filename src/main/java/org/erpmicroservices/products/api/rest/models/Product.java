@@ -102,6 +102,28 @@ public class Product extends AbstractPersistable<UUID> {
  @JoinColumn(name = "good_id")
  private List<ReorderGuideline> reorderGuidelines = new ArrayList<>();
 
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "product_id")
+ private List<ProductCategoryClassification> productCategoryClassifications = new ArrayList<>();
+
+ public List<ProductCategoryClassification> getProductCategoryClassifications() {
+	return productCategoryClassifications;
+ }
+
+ public void setProductCategoryClassifications(List<ProductCategoryClassification> productCategoryClassifications) {
+	this.productCategoryClassifications = productCategoryClassifications;
+ }
+
+ public List<ReorderGuideline> getReorderGuidelines() {
+	return reorderGuidelines;
+ }
+
+ public void setReorderGuidelines(List<ReorderGuideline> reorderGuidelines) {
+	this.reorderGuidelines = reorderGuidelines;
+ }
+
  public UnitOfMeasure getUnitOfMeasure() {
 	return unitOfMeasure;
  }
