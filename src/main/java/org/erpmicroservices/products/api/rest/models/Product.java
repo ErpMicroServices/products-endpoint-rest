@@ -80,6 +80,11 @@ public class Product extends AbstractPersistable<UUID> {
  @JoinColumn(name = "to_product_id")
  private List<ProductAssociation> toProductAssociations = new ArrayList<>();
 
+ @OneToMany(
+	 cascade = CascadeType.ALL,
+	 orphanRemoval = true)
+ @JoinColumn(name = "good_id")
+ private List<GoodIdentification> goodIdentifications = new ArrayList<>();
 
  public List<ProductAssociation> getFromProductAssociations() {
 	return fromProductAssociations;

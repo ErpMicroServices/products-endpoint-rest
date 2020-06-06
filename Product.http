@@ -16,6 +16,24 @@ client.global.set("productType", response.headers.valueOf("Location"));
 
 ###
 
+POST http://localhost:8080/goodIdentificationTypes
+Content-Type: application/json
+
+{
+  "description": "This is a good identification type"
+}
+
+> {%
+
+client.test("Request executed successfully", function() {
+        client.assert(response.status === 201, "Response status is not 201");
+    });
+
+client.global.set("goodIdentificationType", response.headers.valueOf("Location"));
+%}
+
+###
+
 POST http://localhost:8080/productAssociationTypes
 Content-Type: application/json
 
@@ -440,5 +458,23 @@ client.test("Request executed successfully", function() {
     });
 client.global.set("productAssociation", response.headers.valueOf("Location"))
  %}
+
+###
+
+POST http://localhost:8080/goodIdentifications
+Content-Type: application/json
+
+{
+  "value": "this is a good identification",
+  "good": "{{product}}",
+  "type": "{{goodIdentificationType}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 201, "Response status is not 201");
+});
+client.global.set("goodIdentification", response.headers.valueOf("Location"))
+%}
 
 ###
