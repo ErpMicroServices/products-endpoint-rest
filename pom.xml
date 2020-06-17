@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.erpmicroservices.products.api.rest</groupId>
     <artifactId>products_api_rest</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>products_api_rest</name>
     <description>
@@ -21,7 +21,7 @@
         <developerConnection>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git
         </developerConnection>
         <url>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</url>
-      <tag>products_api_rest-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
     <properties>
         <java.version>11</java.version>
