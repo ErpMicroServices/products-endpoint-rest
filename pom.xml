@@ -20,7 +20,6 @@
         <connection>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</developerConnection>
         <url>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</url>
-      <tag>products_api_rest-1.0.0</tag>
   </scm>
     <properties>
         <java.version>11</java.version>
