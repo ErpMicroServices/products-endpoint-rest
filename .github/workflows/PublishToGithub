@@ -13,4 +13,4 @@ jobs:
       - name: Publish package
         run: mvn -B deploy
         env:
-          GITHUB_TOKEN: 18d38c975ff1a8d6eccde5c30c402ff091e71d2c
+          GITHUB_TOKEN: {{ $sectrets.TOKEN }}
