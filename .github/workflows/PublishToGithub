@@ -13,4 +13,4 @@ jobs:
       - name: Publish package
         run: mvn -B deploy
         env:
-          GITHUB_TOKEN: 37be1cafdbb36e7c9dfbaa72e5a2e44e507aa973
+          GITHUB_TOKEN: 18d38c975ff1a8d6eccde5c30c402ff091e71d2c
