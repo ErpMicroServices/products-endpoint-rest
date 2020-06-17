@@ -17,9 +17,9 @@
         may be offered by a company, or used by a company.
     </description>
     <scm>
-        <connection>scm:git:ssh://git@github.com:ErpMicroServices/products-endpoint-rest.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:ErpMicroServices/products-endpoint-rest.git</developerConnection>
-        <url>scm:git:ssh://git@github.com:ErpMicroServices/products-endpoint-rest.git</url>
+        <connection>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</developerConnection>
+        <url>scm:git:ssh://git@github.com/ErpMicroServices/products-endpoint-rest.git</url>
       <tag>products_api_rest-1.0.0</tag>
   </scm>
     <properties>
